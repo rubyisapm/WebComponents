@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="delete">删除节点</div>
+<div id="change">改变节点属性</div>
+<script>
+    var p=Object.create(HTMLElement.prototype);
+    p.hello=function(){
+        var t=document.createTextNode("这是通过节点的方法添加进去的文字.");
+        this.appendChild(t);
+    }
+    p.createdCallback=function(){
+        var t=document.createTextNode("这是新创建实例是自动调用回调添加进去的.");
+        this.appendChild(t);
+    }
+    p.attachedCallback=function(){
+        var t=document.createTextNode("这是把该新建节点添加到document上时添加上去的.");
+        this.appendChild(t);
+    }
+    p.detachedCallback=function(){
+        alert("节点已被删除");
+    }
+    p.attributeChangedCallback=function(){
+        alert("元素属性被更改");
+    }
+    var ruby=document.registerElement("ruby-hello",{prototype:p});
+    var r=document.createElement("ruby-hello");
+    document.querySelector('body').appendChild(r);
+    document.querySelector("ruby-hello").hello();
+
+    var deleteBtn=document.getElementById("delete");
+    deleteBtn.onclick=function(){
+        var ruby=document.querySelector("ruby-hello");
+        document.querySelector("body").removeChild(ruby);
+    }
+    changeBtn=document.querySelector("#change");
+    changeBtn.onclick=function(){
+        var ruby=document.querySelector("ruby-hello");
+        ruby.setAttribute("class","class1");
+    }
+</script>
+
+</body>
+</html>

@@ -10,7 +10,18 @@
     </template>
 <script>
     var tpl=document.querySelector("#tpl");
+    console.log(tpl);
     document.querySelector('body').appendChild(tpl.content.cloneNode(true));
+
+    /*
+     * 顺便了解下DocumentFragment节点
+    var frag=document.createDocumentFragment();
+    var div=document.createElement("div");
+    div.appendChild(document.createTextNode("这是新添加的div"));
+    frag.appendChild(div);
+
+    document.body.appendChild(frag);*/
+
 </script>
 </body>
 </html>
